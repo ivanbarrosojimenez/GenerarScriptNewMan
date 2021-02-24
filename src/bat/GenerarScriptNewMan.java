@@ -1,4 +1,6 @@
+
 package bat;
+
 import java.io.IOException;
 
 public class GenerarScriptNewMan {
@@ -39,7 +41,7 @@ public class GenerarScriptNewMan {
             // sfRespuesta.append("pause\n");
 
             GrabarFichero grabarFichero = new GrabarFichero();
-            grabarFichero.crearFichero("scriptPruebasFase" + fase + "_p_" + prueba + ".bat");
+            grabarFichero.crearFichero("scriptPruebasFase" + fase + "_p_" + prueba + ".bat", false);
 
             grabarFichero.agregarAFichero(sfRespuesta.toString());
             grabarFichero.cerrarFichero();
