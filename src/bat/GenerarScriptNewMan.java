@@ -9,9 +9,9 @@ public class GenerarScriptNewMan {
 
         int fase = 1;
         int numPruebas = 18;
-        String entornoDB2 = "eUrsaePru.json";
+        String entornoDB2 = "eDb2Estable.json";
         String entornoSQL = "eSQL.json";
-        String entornoComparacion = entornoSQL;
+        String entornoComparacion = entornoDB2;
 
         StringBuffer sfRespuesta = new StringBuffer();
 
