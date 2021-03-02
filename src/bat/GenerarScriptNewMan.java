@@ -80,7 +80,7 @@ public class GenerarScriptNewMan {
                          + prueba + ".json\n";
                  sfRespuesta.append(l1);
                  String l2 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\" + entornoComparacion[0] + " -g "+carpetaGlobales+"\\" + prueba
+                         + ".json -e ..\\" + entornoComparacion[entorno] + " -g "+carpetaGlobales+"\\" + prueba
                          + ".json -d "+carpetaGlobales+"\\" + prueba
                          + ".json --reporters cli,json --reporter-json-export "+carpetaResultados+"\\respuesta_"
                          + prueba + ".json\n";
