@@ -36,7 +36,7 @@ public class GenerarScriptNewMan {
                          + prueba + ".json\n";
                  sfRespuesta.append(l1);
                  String l2 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\" + entornoComparacion[0] + " -g "+carpetaGlobales+"\\" + prueba
+                         + ".json -e ..\\" + entornoComparacion[entorno] + " -g "+carpetaGlobales+"\\" + prueba
                          + ".json -d "+carpetaGlobales+"\\" + prueba
                          + ".json --reporters cli,json --reporter-json-export "+carpetaResultados+"\\respuesta_"
                          + prueba + ".json\n";
@@ -47,7 +47,7 @@ public class GenerarScriptNewMan {
                  // sfRespuesta.append("echo \n");
                  // sfRespuesta
                  // .append("echo * * * * * * * * * * * * * FIN DEL PROCESO!! * * * * * * * \n");
-                 // sfRespuesta.append("timeout /t 1\n");
+                 // sfRespuesta.append("timeout /t 5\n");
                  // sfRespuesta.append("cls\n");
                  // sfRespuesta.append("goto end\n");
                  sfRespuesta.append("pause\n");
