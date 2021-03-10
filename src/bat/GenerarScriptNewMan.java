@@ -7,8 +7,8 @@ public class GenerarScriptNewMan {
 	static String [] colores = {"1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c","1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c"};
     public static void main(String[] args) throws IOException {
     	/** Modificar solo esto*/
-        int fase = 1;
-        int numPruebas = 18;
+        int fase = 2;
+        int numPruebas = 7;
         /** Modificar solo esto*/
         
         
