@@ -7,20 +7,23 @@ public class GenerarScriptNewMan {
 	static String [] colores = {"1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c","1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c"};
     public static void main(String[] args) throws IOException {
     	/** Modificar solo esto*/
-        int fase = 2;
-        int numPruebas = 7;
+        int fase = 10;
+        int numPruebas = 9;
         /** Modificar solo esto*/
         
         
         
         String entornoDB2 = "eDb2Estable.json";
         String entornoSQL = "eSQLEstable.json";
-        String [] entornoComparacion = new String[2];
+        String entornoDB2NoEstable = "eDb2NoEstable.json";
+        String entornoSQLNoEstable = "eSQLNoEstable.json";
+        String [] entornoComparacion = new String[4];
         entornoComparacion[0] = entornoDB2;
         entornoComparacion[1] = entornoSQL;
-        
+        entornoComparacion[2] = entornoDB2NoEstable;//COMENTAR SI NO QUEREMOS GENERAR SCRIPT PARA ENTORNOS NO ESTABLES
+        entornoComparacion[3] = entornoSQLNoEstable;//COMENTAR SI NO QUEREMOS GENERAR SCRIPT PARA ENTORNOS NO ESTABLES
         //Para generar por separado:
-        for (int entorno = 0; entorno < 2; entorno++) {
+        for (int entorno = 0; entorno < entornoComparacion.length; entorno++) {
         	 StringBuffer sfRespuesta = new StringBuffer();
              String carpetaResultados = "resultados"+entornoComparacion[entorno].substring(1, 4);
              String carpetaGlobales = "globales"+entornoComparacion[entorno].substring(1, 4);
