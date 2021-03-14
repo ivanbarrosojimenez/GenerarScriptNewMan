@@ -14,7 +14,7 @@ public class GenerarScriptNewMan {
         int fase = 1;
         int numPruebas = 30;
         String version = "v7";
-        filtro = "NoEstable";//Poner NoEstable para generar las 4 pruebas, * para todas
+        filtro = "NoEstable";//Poner NoEstable para generar las 2 pruebas estables, * para todas
         /** Modificar solo esto*/
 
         
@@ -46,29 +46,28 @@ public class GenerarScriptNewMan {
 
                  sfRespuesta.append("echo * * * * FIN DEL PROCESO. * * * * \n");
 
-                 //sfRespuesta.append("pause\n");
-
                  GrabarFichero grabarFichero = new GrabarFichero();
                  grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5)+version+"/scriptPruebasFase" + fase + "_p_" + prueba + ".bat", true);
                  grabarFichero.agregarAFichero(sfRespuesta.toString());
                  grabarFichero.cerrarFichero();
                  sfRespuestaTotal.append(sfRespuesta);
-                 //Poner aqui grabar para generar por separado
                  System.out.println("Fin de generacion bat " +entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5) + " fase " + fase);
              }
-             sfRespuestaTotal.append(":end\n");
-             sfRespuestaTotal.append("echo \n");
-             sfRespuestaTotal.append("cls\n");
-             sfRespuestaTotal
-              .append("echo * * * * * * * * * * * * * FIN DEL PROCESO!! * * * * * * * \n");
-             sfRespuestaTotal.append("timeout /t 7\n");
-             
-             sfRespuestaTotal.append("goto end\n");
-
-             GrabarFichero grabarFichero = new GrabarFichero();
-             grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5)+version+"/scriptPruebasFase" + fase +"_"+ numPruebas + "pruebas.bat", true);
-             grabarFichero.agregarAFichero(sfRespuestaTotal.toString());
-             grabarFichero.cerrarFichero();
+             if(generarBatUnico) {
+	             sfRespuestaTotal.append(":end\n");
+	             sfRespuestaTotal.append("echo \n");
+	             sfRespuestaTotal.append("cls\n");
+	             sfRespuestaTotal
+	              .append("echo * * * * * * * * * * * * * FIN DEL PROCESO!! * * * * * * * \n");
+	             sfRespuestaTotal.append("timeout /t 7\n");
+	             
+	             sfRespuestaTotal.append("goto end\n");
+	
+	             GrabarFichero grabarFichero = new GrabarFichero();
+	             grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5)+version+"/scriptPruebasFase" + fase +"_"+ numPruebas + "pruebas.bat", true);
+	             grabarFichero.agregarAFichero(sfRespuestaTotal.toString());
+	             grabarFichero.cerrarFichero();
+             }
 		}
         //Fin de generar por separado
       /*  
