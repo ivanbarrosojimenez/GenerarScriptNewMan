@@ -26,7 +26,7 @@ public class Main {
         //resultados.generarScriptResultado(fase, numPruebas, version, generarBatUnico, version, entornoComparacion);
         
     	/** Modificar solo esto para tiempos*/
-        int numIteraciones = 10;
+        int numIteraciones = 2;
 		generarBatUnico = true;
         fase = 4;
         numPruebas = 5;

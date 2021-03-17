@@ -84,11 +84,13 @@ public class GenerarScriptNewMan {
                  sfRespuesta.append("mkdir "+carpetaResultadosMF+"\n");
                  sfRespuesta.append("mkdir "+carpetaResultadosSQL+"\n");
                  String l1 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\UrsaePre.json --iteration-count "+numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosMF+"\\"
+                         + ".json -e ..\\UrsaePre.json --iteration-count "
+                		 +numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosMF+"\\prueba"
                          + prueba + ".json\n";
                  sfRespuesta.append(l1);
                  String l2 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\"+entornoComparacion+" --iteration-count "+numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosSQL+"\\"
+                         + ".json -e ..\\"+entornoComparacion+" --iteration-count "
+                		 +numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosSQL+"\\prueba"
                          + prueba + ".json\n";
                  sfRespuesta.append(l2);
 
