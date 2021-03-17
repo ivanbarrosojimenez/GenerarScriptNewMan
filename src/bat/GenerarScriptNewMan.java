@@ -7,18 +7,11 @@ import java.io.IOException;
 
 public class GenerarScriptNewMan {
 	private static String [] colores = {"1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c","1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c","1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c","1f","26","37","48","59","60","7a","8b","9c","ad","be","cf","d1","e2","af","c9","9c"};
-    private static String filtro = "";
-	public static void main(String[] args) throws IOException {
-    	/** Modificar solo esto*/
-		boolean generarBatUnico = true;
-        int fase = 1;
-        int numPruebas = 30;
-        String version = "v7";
-        filtro = "NoEstable";//Poner NoEstable para generar las 2 pruebas estables, * para todas
-        /** Modificar solo esto*/
 
-        
-        String [] entornoComparacion = obtenerNombresEntornos(); 
+    
+	public boolean generarScriptResultado(int fase, int numPruebas, String version, boolean generarBatUnico, String filtro,String [] entornoComparacion) throws IOException {
+
+
 
         //Para generar por separado:
         for (int entorno = 0; entorno < entornoComparacion.length; entorno++) {
@@ -69,72 +62,63 @@ public class GenerarScriptNewMan {
 	             grabarFichero.cerrarFichero();
              }
 		}
-        //Fin de generar por separado
-      /*  
-      //Para generar un unico fichero:
-        for (int entorno = 0; entorno < entornoComparacion.length; entorno++) {
+        return true;
+	}
+	
+	public boolean generarScriptTiempos(int numIteraciones, int fase, int numPruebas, String version, boolean generarBatUnico, String filtro, String entornoComparacion) throws IOException {
+
+        //call newman run ..\Colecciones\ColeccionPostman_fase_4_4.json -e ..\UrsaePru.json --iteration-count 2 --reporters cli,json --reporter-json-export "F4respuestas\prueba4.json"
+        
+
+        //Para generar por separado:
         	 StringBuffer sfRespuesta = new StringBuffer();
-             String carpetaResultados = "F"+fase+"resultados"+entornoComparacion[entorno].substring(1, 4);
-             String carpetaGlobales = "F"+fase+"globales"+entornoComparacion[entorno].substring(1, 4);
-             //comentar para generar por separado
-            
-             sfRespuesta = new StringBuffer();
-             sfRespuesta.append("mkdir "+carpetaResultados+"\n");
-             sfRespuesta.append("mkdir "+carpetaGlobales+"\n");
+        	 StringBuffer sfRespuestaTotal = new StringBuffer();
+             String carpetaResultadosMF = "F"+fase+"resultadosDb2";
+             String carpetaResultadosSQL = "F"+fase+"resultadosSQL";
+
+             
              for (int prueba = 0; prueba < numPruebas; prueba++) {
-                 sfRespuesta.append("title \"ENTORNO "+entornoComparacion[entorno].substring(1, +entornoComparacion[entorno].length()-5)+" COLECCION "+prueba+"/"+(numPruebas-1)+"\"\n");
+                 sfRespuesta = new StringBuffer();
+                 sfRespuesta.append("title \"ENTORNO "+entornoComparacion.substring(1, +entornoComparacion.length()-5)+" COLECCION "+prueba+"/"+(numPruebas-1)+"\"\n");
                  sfRespuesta.append("color "+colores[prueba]+"\n");
+                 sfRespuesta.append("mkdir "+carpetaResultadosMF+"\n");
+                 sfRespuesta.append("mkdir "+carpetaResultadosSQL+"\n");
                  String l1 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\UrsaePru.json --reporters cli,json --reporter-json-export "+carpetaGlobales+"\\"
+                         + ".json -e ..\\UrsaePre.json --iteration-count "+numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosMF+"\\"
                          + prueba + ".json\n";
                  sfRespuesta.append(l1);
                  String l2 = "call newman run ..\\Colecciones\\ColeccionPostman_fase_" + fase + "_" + prueba
-                         + ".json -e ..\\" + entornoComparacion[entorno] + " -g "+carpetaGlobales+"\\" + prueba
-                         + ".json -d "+carpetaGlobales+"\\" + prueba
-                         + ".json --reporters cli,json --reporter-json-export "+carpetaResultados+"\\respuesta_"
+                         + ".json -e ..\\"+entornoComparacion+" --iteration-count "+numIteraciones+" --reporters cli,json --reporter-json-export "+carpetaResultadosSQL+"\\"
                          + prueba + ".json\n";
                  sfRespuesta.append(l2);
 
-                 
-                 // sfRespuesta.append(":end\n");
-                 // sfRespuesta.append("echo \n");
-                 // sfRespuesta
-                 // .append("echo * * * * * * * * * * * * * FIN DEL PROCESO!! * * * * * * * \n");
-                 // sfRespuesta.append("timeout /t 1\n");
-                 // sfRespuesta.append("cls\n");
-                 // sfRespuesta.append("goto end\n");
-                 //sfRespuesta.append("pause\n");
+                 sfRespuesta.append("echo * * * * FIN DEL PROCESO. * * * * \n");
 
-//                 GrabarFichero grabarFichero = new GrabarFichero();
-//                 grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion[entorno].substring(0, 11)+"/scriptPruebasFase" + fase + "_p_" + prueba + ".bat", true);
-
-                 //Poner aqui grabar para generar por separado
-                 System.out.println("Fin de generacion bat " +entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5) + " fase " + fase);
+                 GrabarFichero grabarFichero = new GrabarFichero();
+                 grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion.substring(1, entornoComparacion.length()-5)+version+"/scriptPruebasFase" + fase + "_p_" + prueba + ".bat", true);
+                 grabarFichero.agregarAFichero(sfRespuesta.toString());
+                 grabarFichero.cerrarFichero();
+                 sfRespuestaTotal.append(sfRespuesta);
+                 System.out.println("Fin de generacion bat " +entornoComparacion.substring(1, entornoComparacion.length()-5) + " fase " + fase);
              }
-             sfRespuesta.append("pause\n");
-             GrabarFichero grabarFichero = new GrabarFichero();
-             grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion[entorno].substring(1, entornoComparacion[entorno].length()-5)+version+"/scriptPruebasFase" + fase +"_"+ numPruebas + "pruebas.bat", true);
-             grabarFichero.agregarAFichero(sfRespuesta.toString());
-             grabarFichero.cerrarFichero();
-		}
-        //Fin de generar un unico fichero
-       */
-    }
-    
-	static FilenameFilter filtrado = new FilenameFilter() {
-	    @Override
-	    public boolean accept(File dir, String name) {
-	        return name.toLowerCase().startsWith("e") && !name.contains(filtro);
-	    }
-	};
+             if(generarBatUnico) {
+	             sfRespuestaTotal.append(":end\n");
+	             sfRespuestaTotal.append("echo \n");
+	             sfRespuestaTotal.append("cls\n");
+	             sfRespuestaTotal
+	              .append("echo * * * * * * * * * * * * * FIN DEL PROCESO!! * * * * * * * \n");
+	             sfRespuestaTotal.append("timeout /t 7\n");
+	             
+	             sfRespuestaTotal.append("goto end\n");
 	
-	private static String [] obtenerNombresEntornos() {
-        File files[] = (new File("entornos/")).listFiles(filtrado);
-        String [] entornoComparacion = new String[files.length];
-        for (int i = 0; i < entornoComparacion.length; i++) {
-			entornoComparacion[i] = files[i].getName();
-		}
-        return entornoComparacion;
+	             GrabarFichero grabarFichero = new GrabarFichero();
+	             grabarFichero.crearFichero("ScriptFase"+fase+"_"+entornoComparacion.substring(1, entornoComparacion.length()-5)+version+"/scriptPruebasFase" + fase +"_"+ numPruebas + "pruebas.bat", true);
+	             grabarFichero.agregarAFichero(sfRespuestaTotal.toString());
+	             grabarFichero.cerrarFichero();
+             }
+		
+        return true;
 	}
+
 
 }
