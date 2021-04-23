@@ -17,24 +17,24 @@ public class Main {
         
     	/** Modificar solo esto para resultados*/
 		boolean generarBatUnico = true;
-        int fase = 11;
-        int numPruebas = 1;
-        String version = "v7";
-        filtro = "NoEstable";//Poner NoEstable para generar las 2 pruebas estables, * para todas
+        int fase = 25;
+        int numPruebas = 16;
+        String version = "v25";
+        filtro = "*";//Poner NoEstable para generar las 2 pruebas estables, * para todas
         /** Modificar solo esto*/
         
-        //resultados.generarScriptResultado(fase, numPruebas, version, generarBatUnico, version, entornoComparacion);
+        resultados.generarScriptResultado(fase, numPruebas, version, generarBatUnico, version, entornoComparacion);
         
     	/** Modificar solo esto para tiempos*/
-        int numIteraciones = 2;
+        /*int numIteraciones = 2;
 		generarBatUnico = true;
         fase = 4;
         numPruebas = 5;
         version = "Tiempos";
-        filtro = "NoEstable";//Poner NoEstable para generar las 2 pruebas estables, * para todas
+        filtro = "NoEstable";//Poner NoEstable para generar las 2 pruebas estables, * para todas*/
         /** Modificar solo esto para tiempos*/
         
-        resultados.generarScriptTiempos(numIteraciones, fase, numPruebas, version, generarBatUnico, version, "eSqlEstable.json");
+        //resultados.generarScriptTiempos(numIteraciones, fase, numPruebas, version, generarBatUnico, version, "eSqlEstable.json");
 
 	}
 	
