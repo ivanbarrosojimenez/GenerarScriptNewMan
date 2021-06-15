@@ -18,8 +18,8 @@ public class Main {
     	/** Modificar solo esto para resultados*/
 		boolean generarBatUnico = true;
         int fase = 9;
-        int numPruebas = 51;
-        String version = "v10";
+        int numPruebas = 100;
+        String version = "v12_1";
         filtro = "*";//Poner NoEstable para generar las 2 pruebas estables, * para todas
         /** Modificar solo esto*/
         
@@ -27,12 +27,12 @@ public class Main {
         
     	/** Modificar solo esto para tiempos*/
         /*int numIteraciones = 3;
-		generarBatUnico = true;
+		boolean generarBatUnico = true;
         int fase = 9;
-        int numPruebas = 39;
+        int numPruebas = 100;
         String version = "Tiempos";
-        boolean compararPre = false;
-        filtro = "*";//Poner NoEstable para generar las 2 pruebas estables, * para todas*/
+        boolean compararPre = true;
+        filtro = "*";//Poner NoEstable para generar las 2 pruebas estables, * para todas
         /** Modificar solo esto para tiempos*/
         
         //resultados.generarScriptTiempos(compararPre, numIteraciones, fase, numPruebas, version, generarBatUnico, version, entornoComparacion);
