@@ -19,7 +19,7 @@ public class Main {
 		boolean generarBatUnico = true;
         int fase = 9;
         int numPruebas = 100;
-        String version = "v12_1";
+        String version = "v12_7";
         filtro = "*";//Poner NoEstable para generar las 2 pruebas estables, * para todas
         /** Modificar solo esto*/
         
